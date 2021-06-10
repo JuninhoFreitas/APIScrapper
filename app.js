@@ -1,13 +1,18 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 
 const rotaProdutos = require('./routes/produtos');
 const rotaPedidos = require('./routes/pedidos')
 
 app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.use('/produtos', rotaProdutos);
 app.use('/pedidos', rotaPedidos);
+
 
 app.use((req, res, next) => {
   const erro = new Error('Rota inexistente.');

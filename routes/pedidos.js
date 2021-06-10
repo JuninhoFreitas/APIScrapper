@@ -8,8 +8,13 @@ router.get('/', (req, res, next) => {
 })
 // Insere pedidos
 router.post('/', (req, res, next) => {
+  const pedido = {
+    nome: req.body.nome,
+    quantidade: req.body.quantidade
+  }
   res.status(201).send({
-    mensagem: 'Insere um pedido'
+    mensagem: 'Pedido inserido.',
+    pedidoCriado: { Nome: `${pedido.nome}`, Quantidade: (pedido.quantidade >= 0) || (pedido.quantidade <= 0) ? (pedido.quantidade) : ('Quantidade inválida') }
   })
 })
 // Retorna dados de um pedido

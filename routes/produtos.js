@@ -8,8 +8,13 @@ router.get('/', (req, res, next) => {
 })
 // Insere produtos
 router.post('/', (req, res, next) => {
+  const produto = {
+    nome: req.body.nome,
+    preco: Number(req.body.preco),
+  }
   res.status(201).send({
-    mensagem: 'Usando o POST dentro da rota de produtos'
+    mensagem: 'Cadastro de produto efetivado. ',
+    produtoCriado: `Nome: ${produto.nome} Preço: ${produto.preco >= 0 ? (produto.preco) : ('Produto Invalido')}`
   })
 })
 // Retorna dados de um produto
