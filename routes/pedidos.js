@@ -28,11 +28,13 @@ router.get('/:id_pedido', (req, res, next) => {
   }
 
 })
-// Deleta um pedido
 
-router.delete('/', (req, res, next) => {
-  req.status(201).send({
-    mensagem: 'Pedido deletado'
+// Deleta um pedido
+router.delete('/:id_pedido', (req, res, next) => {
+  const id_pedido = req.params.id_pedido;
+
+  res.status(201).send({
+    mensagem: `Pedido Nº${id_pedido} deletado com sucesso.`
   })
 })
 module.exports = router;
