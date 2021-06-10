@@ -1,0 +1,28 @@
+{
+  "name": "apiscrapper",
+  "version": "0.0.1",
+  "description": "��#\u0000 \u0000A\u0000P\u0000I\u0000S\u0000c\u0000r\u0000a\u0000p\u0000p\u0000e\u0000r\u0000\r\u0000 \u0000#\u0000 \u0000A\u0000P\u0000I\u0000S\u0000c\u0000r\u0000a\u0000p\u0000p\u0000e\u0000r\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuninhoFreitas/APIScrapper.git"
+  },
+  "keywords": [
+    "node",
+    "rest",
+    "api",
+    "scrapper"
+  ],
+  "author": "João de Freitas Brizolla Junior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuninhoFreitas/APIScrapper/issues"
+  },
+  "homepage": "https://github.com/JuninhoFreitas/APIScrapper#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
