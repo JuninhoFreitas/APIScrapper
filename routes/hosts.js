@@ -2,25 +2,25 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('../mysql').pool;
 
-// Retorna produtos
+// Retorna hosts
 router.get('/', (req, res, next) => {
   mysql.getConnection((error, conn) => {
     if (error) { return res.status(500).send({ error: error }) }
     conn.query(
       'SELECT * FROM produtos;',
-      (error, resultado, fields) => {
+      (error, result, fields) => {
         conn.release();
         if (error) { return res.status(500).send({ error: error }) }
         const response = {
-          quantidade: resultado.length,
-          produtos: resultado.map(prod => {
+          quantidade: result.length,
+          produtos: result.map(prod => {
             return {
               id_produto: prod.id_produto,
               nome: prod.nome,
               preco: prod.preco,
               request: {
                 tipo: 'GET',
-                descricao: '',
+                descricao: 'Retorna todos os produtos',
                 url: `http://localhost:3000/produtos/${prod.id_produto}`
               }
             }
@@ -49,7 +49,7 @@ router.post('/', (req, res, next) => {
     conn.query(
       'INSERT INTO produtos(nome,preco) VALUES(?,?)',
       [produto.nome, produto.preco],
-      (error, resultado, field) => {
+      (error, result, field) => {
         conn.release();
         if (error) {
           return res.status(500).send({
@@ -58,7 +58,7 @@ router.post('/', (req, res, next) => {
           })
         }
         res.status(201).send({
-          mensagem: `Cadastro de produto feito com o ID ${resultado.insertId}`,
+          mensagem: `Cadastro de produto feito com o ID ${result.insertId}`,
           produtoCriado: `Nome: ${produto.nome} Preço: ${produto.preco >= 0 ? (produto.preco) : ('Produto Invalido')}`
         })
 
@@ -75,10 +75,10 @@ router.get('/:id_produto', (req, res, next) => {
     conn.query(
       'SELECT * FROM produtos WHERE id_produto = ?',
       [id],
-      (error, resultado, field) => {
+      (error, result, field) => {
         conn.release();
         if (error) { return res.status(500).send({ error: error }) }
-        return (res.status(200).send({ response: resultado }))
+        return (res.status(200).send({ response: result }))
       }
     )
   })
@@ -96,15 +96,15 @@ router.patch('/:id_produto', (req, res, next) => {
       WHERE id_produto = ?;
       `,
       [req.body.nome, req.body.preco, id],
-      (error, resultado, field) => {
+      (error, result, field) => {
         conn.release();
         if (error) { return res.status(500).send({ error: error }) }
         conn.query(
           'SELECT * FROM produtos WHERE id_produto = ?',
           [id],
-          (error, resultado, field) => {
+          (error, result, field) => {
             if (error) { return res.status(500).send({ error: error }) }
-            return (res.status(200).send({ novos_valores: resultado }))
+            return (res.status(200).send({ novos_valores: result }))
           }
         )
 
@@ -120,11 +120,11 @@ router.delete('/:id_produto', (req, res, next) => {
     conn.query(
       'DELETE FROM produtos WHERE id_produto = ?',
       [id],
-      (error, resultado, field) => {
+      (error, result, field) => {
         conn.release();
         if (error) { return res.status(500).send({ error: error }) }
         return (res.status(202).send({
-          resultado: resultado
+          result: result
         }))
       }
     )

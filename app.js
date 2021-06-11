@@ -4,8 +4,8 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
 
-const rotaProdutos = require('./routes/produtos');
-const rotaPedidos = require('./routes/pedidos')
+const rotaHosts = require('./routes/hosts');
+const rotaSeletores = require('./routes/seletores')
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,8 +25,8 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use('/produtos', rotaProdutos);
-app.use('/pedidos', rotaPedidos);
+app.use('/hosts', rotaHosts);
+app.use('/seletores', rotaSeletores);
 
 
 app.use((req, res, next) => {
