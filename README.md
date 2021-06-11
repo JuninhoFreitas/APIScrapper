@@ -5,7 +5,8 @@
 **Nesta fase inicial, eu estarei definindo rotas, e outras coisinhas padrão, não especifico para o webscrapping, não se assuste.**
 # TO-DO
  - [X] Definir rotas
- - [ ] Conexão com banco de dados
+ - [ ] Modelagem do banco de Dados
+ - [ ] Conexão NodeXBanco
  - [ ] Manipulação do banco de dados via API
  - [ ] Unit Tests
 
